@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:price_app/presentation/screens/deals/deals_screen.dart';
 import 'package:price_app/presentation/screens/home/homepage_screen.dart';
-import 'package:price_app/presentation/screens/profile/profile_screen.dart';
-import 'package:price_app/presentation/screens/saved/saved_screen.dart';
+import 'package:price_app/presentation/screens/home/profile_screen.dart';
+import 'package:price_app/presentation/screens/home/saved_screen.dart';
 import 'package:price_app/presentation/screens/vendor/index_screen.dart';
 
 class AppRouter {

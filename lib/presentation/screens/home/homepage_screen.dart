@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:price_app/presentation/notifier/ui_provider.dart';
 import 'package:price_app/presentation/widgets/category_filter.dart';
 import 'package:price_app/presentation/widgets/custom_search_bar.dart';
 import 'package:price_app/presentation/widgets/featured_store_card.dart';
@@ -9,7 +8,6 @@ import 'package:price_app/presentation/widgets/stock_alert_card.dart';
 import 'package:price_app/utils/app_colors.dart';
 import 'package:price_app/utils/app_icons.dart';
 import 'package:price_app/utils/extention.dart';
-import 'package:provider/provider.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -21,8 +19,6 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
-    late UiNotifier uiNotifier;
-    uiNotifier = context.watch<UiNotifier>();
     return Scaffold(
       backgroundColor: context.scaffoldColor,
       body: SafeArea(
@@ -31,7 +27,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
