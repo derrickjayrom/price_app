@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:price_app/presentation/notifier/ui_provider.dart';
 import 'package:price_app/presentation/widgets/category_filter.dart';
 import 'package:price_app/presentation/widgets/custom_search_bar.dart';
 import 'package:price_app/presentation/widgets/featured_store_card.dart';
@@ -8,6 +9,7 @@ import 'package:price_app/presentation/widgets/stock_alert_card.dart';
 import 'package:price_app/utils/app_colors.dart';
 import 'package:price_app/utils/app_icons.dart';
 import 'package:price_app/utils/extention.dart';
+import 'package:provider/provider.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -17,74 +19,12 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
+    late UiNotifier uiNotifier;
+    uiNotifier = context.watch<UiNotifier>();
     return Scaffold(
       backgroundColor: context.scaffoldColor,
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: context.scaffoldColor,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: context.colors.onSurfaceVariant,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppIcons.home,
-              colorFilter: ColorFilter.mode(
-                _selectedIndex == 0
-                    ? AppColors.primary
-                    : context.colors.onSurfaceVariant,
-                BlendMode.srcIn,
-              ),
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppIcons.saved,
-              colorFilter: ColorFilter.mode(
-                _selectedIndex == 1
-                    ? AppColors.primary
-                    : context.colors.onSurfaceVariant,
-                BlendMode.srcIn,
-              ),
-            ),
-            label: 'Saved',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppIcons.deals,
-              colorFilter: ColorFilter.mode(
-                _selectedIndex == 2
-                    ? AppColors.primary
-                    : context.colors.onSurfaceVariant,
-                BlendMode.srcIn,
-              ),
-            ),
-            label: 'Deals',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppIcons.profile,
-              colorFilter: ColorFilter.mode(
-                _selectedIndex == 3
-                    ? AppColors.primary
-                    : context.colors.onSurfaceVariant,
-                BlendMode.srcIn,
-              ),
-            ),
-            label: 'Profile',
-          ),
-        ],
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),

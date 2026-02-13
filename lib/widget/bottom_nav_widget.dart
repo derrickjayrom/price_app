@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:go_router/go_router.dart';
@@ -64,61 +64,10 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
               label: 'Home',
               isSelected: uINotifier.selectedIndex == 0,
             ),
-            BottomNavigationBarItem(
-              icon: Stack(
-                alignment: AlignmentDirectional.topEnd,
-                clipBehavior: Clip.none,
-                children: [
-                  SvgPicture.asset(
-                    AppIcons.home,
-                    colorFilter: ColorFilter.mode(
-                      uINotifier.selectedIndex == 1
-                          ? context.colors.primary
-                          : AppColors.unselectedItem,
-                      BlendMode.srcIn,
-                    ),
-                  ).paddingB(6),
-                  Visibility(
-                    visible: true,
-                    child: Positioned(
-                      top: 2,
-                      right: -0.5,
-                      child: Container(
-                        height: 11,
-                        width: 11,
-                        decoration: BoxDecoration(
-                          color: context.colors.primary,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "3",
-                            style: context.textTheme.displayMedium?.copyWith(
-                              color: context.colors.tertiaryContainer,
-                              fontSize: 6,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Visibility(
-                    visible: false,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 4, right: 2),
-                      height: 15,
-                      width: 15,
-                      child: SpinKitDoubleBounce(
-                        color: uINotifier.selectedIndex == 1
-                            ? context.colors.primary
-                            : AppColors.unselectedItem,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              label: 'bookmark',
+            buildNavItem(
+              iconPath: AppIcons.saved,
+              label: 'Saved',
+              isSelected: uINotifier.selectedIndex == 1,
             ),
             buildNavItem(
               iconPath: AppIcons.deals,
@@ -126,14 +75,9 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
               isSelected: uINotifier.selectedIndex == 2,
             ),
             buildNavItem(
-              iconPath: AppIcons.saved,
-              label: 'Favourites',
-              isSelected: uINotifier.selectedIndex == 3,
-            ),
-            buildNavItem(
               iconPath: AppIcons.profile,
               label: 'Profile',
-              isSelected: uINotifier.selectedIndex == 4,
+              isSelected: uINotifier.selectedIndex == 3,
             ),
           ],
         ),
