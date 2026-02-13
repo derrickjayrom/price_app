@@ -1,0 +1,318 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:price_app/presentation/widgets/category_filter.dart';
+import 'package:price_app/presentation/widgets/custom_search_bar.dart';
+import 'package:price_app/presentation/widgets/featured_store_card.dart';
+import 'package:price_app/presentation/widgets/product_card.dart';
+import 'package:price_app/presentation/widgets/stock_alert_card.dart';
+import 'package:price_app/utils/app_colors.dart';
+import 'package:price_app/utils/app_icons.dart';
+import 'package:price_app/utils/extention.dart';
+
+class HomePageScreen extends StatefulWidget {
+  const HomePageScreen({super.key});
+
+  @override
+  State<HomePageScreen> createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen> {
+  int _selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: context.scaffoldColor,
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: context.scaffoldColor,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: context.colors.onSurfaceVariant,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              AppIcons.home,
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 0
+                    ? AppColors.primary
+                    : context.colors.onSurfaceVariant,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              AppIcons.saved,
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 1
+                    ? AppColors.primary
+                    : context.colors.onSurfaceVariant,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Saved',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              AppIcons.deals,
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 2
+                    ? AppColors.primary
+                    : context.colors.onSurfaceVariant,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Deals',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              AppIcons.profile,
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 3
+                    ? AppColors.primary
+                    : context.colors.onSurfaceVariant,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Profile',
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'WELCOME BACK',
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: context.colors.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Kofi Mensah',
+                        style: context.textTheme.headlineMedium?.copyWith(
+                          color: context.colors.onSurface,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: context.colors.surfaceContainer,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          AppIcons.locationPin,
+                          height: 16,
+                          colorFilter: const ColorFilter.mode(
+                            AppColors.primary,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Accra, GH',
+                          style: context.textTheme.labelMedium?.copyWith(
+                            color: context.colors.onSurface,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const Icon(Icons.keyboard_arrow_down, size: 16),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Search Bar
+              const CustomSearchBar(),
+              const SizedBox(height: 24),
+
+              // Featured Stores
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'FEATURED STORES',
+                    style: context.textTheme.titleMedium?.copyWith(
+                      color: context.colors.onSurfaceVariant,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'View All',
+                    style: context.textTheme.labelMedium?.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                height: 80,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    FeaturedStoreCard(
+                      name: 'Melcom',
+                      imagePath: 'assets/jpeg/melcom.jpeg',
+                    ), // Placeholder
+                    FeaturedStoreCard(
+                      name: 'CompuGhana',
+                      imagePath: 'assets/jpeg/compughana.jpeg',
+                    ),
+                    FeaturedStoreCard(
+                      name: 'Makola Mkt',
+                      imagePath: 'assets/jpeg/makola.jpeg',
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Categories
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    CategoryFilter(
+                      label: 'All Items',
+                      isSelected: true,
+                      onTap: () {},
+                    ),
+                    CategoryFilter(
+                      label: 'Groceries',
+                      isSelected: false,
+                      onTap: () {},
+                    ),
+                    CategoryFilter(
+                      label: 'Phones',
+                      isSelected: false,
+                      onTap: () {},
+                    ),
+                    CategoryFilter(
+                      label: 'Household',
+                      isSelected: false,
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Trending Essentials
+              Row(
+                children: [
+                  Text(
+                    'Trending Essentials',
+                    style: context.textTheme.headlineSmall?.copyWith(
+                      color: context.colors.onSurface,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  const Icon(
+                    Icons.trending_up,
+                    color: AppColors.primary,
+                    size: 20,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              const Row(
+                children: [
+                  Expanded(
+                    child: ProductCard(
+                      name: 'Royal Feast Perfumed Rice (5kg)',
+                      imagePath: 'assets/jpeg/rice.jpeg',
+                      category: 'GROCERIES',
+                      rating: 4.8,
+                      lowestPriceStore: 'Makola',
+                      price: '95.00',
+                      originalPrice: '',
+                    ),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: ProductCard(
+                      name: 'Samsung Galaxy A14 64GB',
+                      imagePath: 'assets/jpeg/samsung.jpeg',
+                      category: 'TECH',
+                      rating: 4.5,
+                      lowestPriceStore: 'CompuGhana',
+                      price: '1,800',
+                      originalPrice: '',
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Second Row of Products
+              const Row(
+                children: [
+                  Expanded(
+                    child: ProductCard(
+                      name: 'Frytol Cooking Oil (1 Liter)',
+                      imagePath: 'assets/jpeg/oil.jpeg',
+                      category: 'PANTRY',
+                      rating: 4.9,
+                      lowestPriceStore: 'Melcom',
+                      price: '25.00',
+                      originalPrice: '',
+                    ),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: ProductCard(
+                      name: 'iPhone 13 Pro (Refurbished)',
+                      imagePath: 'assets/jpeg/iphone.jpeg',
+                      category: 'APPLE',
+                      rating: 5.0,
+                      lowestPriceStore: 'Franko',
+                      price: '6,500',
+                      originalPrice: '',
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 24),
+
+              // Stock Alert
+              const StockAlertCard(),
+              const SizedBox(height: 24),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
