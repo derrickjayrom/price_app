@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'package:gap/gap.dart';
 import 'dart:io';
 import 'dart:async';
 import 'dart:math' show pow;
@@ -10,7 +11,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
-
 
 extension BuildContextX on BuildContext {
   ColorScheme get colors => Theme.of(this).colorScheme;
@@ -170,8 +170,6 @@ extension DateTimeX on DateTime {
   }
 }
 
-
-
 extension NumX on num {
   num quotient(num divisor) {
     if (this < 1) return 0;
@@ -189,6 +187,12 @@ extension NumX on num {
 
   double truncateToDecimalPlaces(num fractionalDigits) =>
       (this * pow(10, fractionalDigits)).truncate() / pow(10, fractionalDigits);
+
+  SizedBox get h => SizedBox(height: toDouble());
+
+  SizedBox get w => SizedBox(width: toDouble());
+
+  Gap get gap => Gap(toDouble());
 }
 
 extension IntX on int {
@@ -316,4 +320,3 @@ extension WidgetX on Widget {
     child: this,
   );
 }
-

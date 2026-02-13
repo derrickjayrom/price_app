@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+import 'package:price_app/presentation/widgets/app_text_field.dart';
 import 'package:price_app/presentation/widgets/category_filter.dart';
-import 'package:price_app/presentation/widgets/custom_search_bar.dart';
 import 'package:price_app/presentation/widgets/featured_store_card.dart';
 import 'package:price_app/presentation/widgets/product_card.dart';
 import 'package:price_app/presentation/widgets/stock_alert_card.dart';
@@ -85,8 +86,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
               const SizedBox(height: 20),
 
               // Search Bar
-              const CustomSearchBar(),
-              const SizedBox(height: 24),
+              AppTextField(
+                hintText: 'Search products...',
+                canFocus: true,
+                prefixWidget: Icon(Icons.search, color: context.colors.primary),
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.text,
+              ),
+              Gap(24),
 
               // Featured Stores
               Row(
