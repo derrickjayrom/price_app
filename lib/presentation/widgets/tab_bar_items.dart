@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:price_app/data/section_header_items.dart';
-import 'package:price_app/utils/app_colors.dart';
 import 'package:price_app/utils/extention.dart';
 
 class TabBarItem extends StatefulWidget {
@@ -23,6 +21,7 @@ class TabBarItem extends StatefulWidget {
     this.maintainDefaultColor = true,
   });
 
+ 
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
@@ -51,12 +50,12 @@ class _TabBarItemState extends State<TabBarItem> {
   @override
   Widget build(BuildContext context) {
     final Color bgColor = (widget.isSelected
-        ? (widget.selectedBg ?? context.colors.primary)
-        : (widget.unselectedBg ?? context.scaffoldColor));
+        ? (widget.selectedBg ?? context.colors.onPrimary)
+        : (widget.unselectedBg ?? context.colors.secondary));
 
     final Color borderColor = widget.isSelected
         ? context.colors.primaryContainer
-        : AppColors.transparent;
+        : context.colors.secondary;
 
     final double borderWidth = widget.isSelected
         ? widget.selectedBorderWidth
@@ -98,37 +97,4 @@ class _TabBarItemState extends State<TabBarItem> {
   }
 }
 
-class TabBarItems extends StatefulWidget {
-  const TabBarItems({super.key});
 
-  @override
-  State<TabBarItems> createState() => _TabBarItemsState();
-}
-
-class _TabBarItemsState extends State<TabBarItems> {
-  int _selectedIndex = 0;
-
- 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(SectionHeaderItems.items.length, (index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: TabBarItem(
-              label: SectionHeaderItems.items[index].title,
-              isSelected: _selectedIndex == index,
-              onTap: () {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-            ),
-          );
-        }),
-      ),
-    );
-  }
-}

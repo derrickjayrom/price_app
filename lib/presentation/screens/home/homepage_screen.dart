@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:price_app/data/section_header_items.dart';
 import 'package:price_app/presentation/widgets/app_location_Picker.dart';
 import 'package:price_app/presentation/widgets/app_text_field.dart';
+import 'package:price_app/presentation/widgets/custom_tab_container.dart';
 import 'package:price_app/presentation/widgets/featured_store_card.dart';
 import 'package:price_app/presentation/widgets/product_card.dart';
 import 'package:price_app/presentation/widgets/stock_alert_card.dart';
@@ -104,7 +106,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   ),
                 ),
                 Gap(24),
-                TabBarItems().padding14h,
+                CustomTabContainer(),
+
                 Gap(24),
                 Row(
                   children: [
@@ -123,7 +126,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ),
                   ],
                 ),
-               Gap(16),
+                Gap(16),
 
                 Row(
                   children: [
