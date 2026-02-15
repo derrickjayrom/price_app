@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:price_app/presentation/widgets/app_location_Picker.dart';
 import 'package:price_app/presentation/widgets/app_text_field.dart';
-import 'package:price_app/presentation/widgets/category_filter.dart';
 import 'package:price_app/presentation/widgets/featured_store_card.dart';
 import 'package:price_app/presentation/widgets/product_card.dart';
 import 'package:price_app/presentation/widgets/stock_alert_card.dart';
-import 'package:price_app/utils/app_colors.dart';
-import 'package:price_app/utils/app_icons.dart';
+import 'package:price_app/presentation/widgets/welcome_user.dart';
+import 'package:price_app/presentation/widgets/tab_bar_items.dart';
 import 'package:price_app/utils/extention.dart';
 import 'package:price_app/widget/app_button_one.dart';
 
@@ -32,58 +31,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'WELCOME BACK',
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: context.colors.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Kofi Mensah',
-                          style: context.textTheme.headlineMedium?.copyWith(
-                            color: context.colors.onSurface,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: context.colors.surfaceContainer,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            AppIcons.locationPin,
-                            height: 16,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.primary,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          Gap(4),
-                          Text(
-                            'Accra, GH',
-                            style: context.textTheme.labelMedium?.copyWith(
-                              color: context.colors.onSurface,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const Icon(Icons.keyboard_arrow_down, size: 16),
-                        ],
-                      ),
-                    ),
-                  ],
+                  children: [WelcomeUser(), AppLocationPicker()],
                 ).padding14h,
                 Gap(20),
 
@@ -114,9 +62,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ),
                   ],
                 ).padding14h,
-
                 Gap(24),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -135,13 +81,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(height: 12),
+                ).padding14h,
+                Gap(12),
                 SizedBox(
                   height: 80,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: const [
+                    children: [
                       FeaturedStoreCard(
                         name: 'Melcom',
                         imagePath: 'assets/jpeg/melcom.jpeg',
@@ -157,39 +103,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
-
-                // Categories
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      CategoryFilter(
-                        label: 'All Items',
-                        isSelected: true,
-                        onTap: () {},
-                      ),
-                      CategoryFilter(
-                        label: 'Groceries',
-                        isSelected: false,
-                        onTap: () {},
-                      ),
-                      CategoryFilter(
-                        label: 'Phones',
-                        isSelected: false,
-                        onTap: () {},
-                      ),
-                      CategoryFilter(
-                        label: 'Household',
-                        isSelected: false,
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-
-                // Trending Essentials
+                Gap(24),
+                TabBarItems().padding14h,
+                Gap(24),
                 Row(
                   children: [
                     Text(
@@ -200,16 +116,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(
+                    Icon(
                       Icons.trending_up,
-                      color: AppColors.primary,
+                      color: context.colors.primary,
                       size: 20,
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+               Gap(16),
 
-                const Row(
+                Row(
                   children: [
                     Expanded(
                       child: ProductCard(
@@ -236,9 +152,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-
-                // Second Row of Products
+                Gap(16),
                 const Row(
                   children: [
                     Expanded(
@@ -266,12 +180,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 24),
-
-                // Stock Alert
+                Gap(24),
                 const StockAlertCard(),
-                const SizedBox(height: 24),
+                Gap(24),
               ],
             ),
           ),

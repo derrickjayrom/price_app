@@ -10,7 +10,7 @@ class StockAlertCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: context.colors.secondaryContainer, // Dark green/card bg
+        color: context.colors.secondaryContainer,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
