@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:price_app/data/section_header_items.dart';
 import 'package:price_app/presentation/widgets/app_location_Picker.dart';
 import 'package:price_app/presentation/widgets/app_text_field.dart';
 import 'package:price_app/presentation/widgets/custom_tab_container.dart';
@@ -8,7 +7,6 @@ import 'package:price_app/presentation/widgets/featured_store_card.dart';
 import 'package:price_app/presentation/widgets/product_card.dart';
 import 'package:price_app/presentation/widgets/stock_alert_card.dart';
 import 'package:price_app/presentation/widgets/welcome_user.dart';
-import 'package:price_app/presentation/widgets/tab_bar_items.dart';
 import 'package:price_app/utils/extention.dart';
 import 'package:price_app/widget/app_button_one.dart';
 
@@ -51,7 +49,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         keyboardType: TextInputType.text,
                       ),
                     ),
-                    const Gap(10),
+                    Gap(10),
                     AppButton(
                       leading: Icon(
                         Icons.filter_alt_outlined,
@@ -107,7 +105,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 Gap(24),
                 CustomTabContainer(),
-
                 Gap(24),
                 Row(
                   children: [
@@ -118,7 +115,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    Gap(8),
                     Icon(
                       Icons.trending_up,
                       color: context.colors.primary,
@@ -141,7 +138,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         originalPrice: '',
                       ),
                     ),
-                    SizedBox(width: 16),
+                    Gap(16),
                     Expanded(
                       child: ProductCard(
                         name: 'Samsung Galaxy A14 64GB',
@@ -169,7 +166,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         originalPrice: '',
                       ),
                     ),
-                    SizedBox(width: 16),
+                    Gap(16),
                     Expanded(
                       child: ProductCard(
                         name: 'iPhone 13 Pro (Refurbished)',
