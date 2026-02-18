@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:price_app/app.dart';
+import 'package:price_app/presentation/notifier/data_notifier.dart';
 import 'package:price_app/presentation/notifier/ui_provider.dart';
 
 // import '/presentation/notifiers/ui_notifier.dart';
@@ -27,7 +28,10 @@ void main() async {
       fallbackLocale: const Locale('en', 'US'),
       useOnlyLangCode: true,
       child: MultiProvider(
-        providers: [ChangeNotifierProvider(create: (_) => UiNotifier())],
+        providers: [
+          ChangeNotifierProvider(create: (_) => UiNotifier()),
+          ChangeNotifierProvider(create: (_) => DataNotifier()),
+        ],
         child: const App(),
       ),
     ),

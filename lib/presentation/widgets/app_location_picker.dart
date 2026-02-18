@@ -17,7 +17,7 @@ class _AppLocationPickerState extends State<AppLocationPicker> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: context.colors.surfaceContainer,
+        color: context.colors.secondary,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -35,7 +35,7 @@ class _AppLocationPickerState extends State<AppLocationPicker> {
             'Accra, GH',
             style: context.textTheme.labelMedium?.copyWith(
               color: context.colors.onSurface,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
           const Icon(Icons.keyboard_arrow_down, size: 16),

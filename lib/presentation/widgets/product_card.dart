@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:price_app/data/models/product_model.dart';
 import 'package:price_app/utils/app_colors.dart';
 import 'package:price_app/utils/extention.dart';
 
 class ProductCard extends StatelessWidget {
-  final String name;
-  final String imagePath;
-  final String category;
-  final double rating;
-  final String lowestPriceStore;
-  final String price;
-  final String originalPrice;
+  final ProductModel product;
 
-  const ProductCard({
-    super.key,
-    required this.name,
-    required this.imagePath,
-    required this.category,
-    required this.rating,
-    required this.lowestPriceStore,
-    required this.price,
-    required this.originalPrice,
-  });
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +21,14 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image placeholder
           Container(
             height: 100,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.black, // Placeholder for image bg
+              color: Colors.black,
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
-                image: AssetImage(imagePath),
+                image: AssetImage(product.imagePath),
                 fit: BoxFit.cover,
               ),
             ),
@@ -55,7 +40,7 @@ class ProductCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                category.toUpperCase(),
+                product.category.toUpperCase(),
                 style: context.textTheme.labelSmall?.copyWith(
                   color: context.colors.primary,
                   fontWeight: FontWeight.bold,
@@ -67,7 +52,7 @@ class ProductCard extends StatelessWidget {
                   const Icon(Icons.star, color: AppColors.dYellow, size: 12),
                   const SizedBox(width: 4),
                   Text(
-                    rating.toString(),
+                    product.rating.toString(),
                     style: context.textTheme.labelSmall?.copyWith(
                       color: AppColors.dYellow,
                       fontWeight: FontWeight.bold,
@@ -81,7 +66,7 @@ class ProductCard extends StatelessWidget {
 
           // Product Name
           Text(
-            name,
+            product.name,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: context.textTheme.titleMedium?.copyWith(
@@ -93,7 +78,7 @@ class ProductCard extends StatelessWidget {
 
           // Store info
           Text(
-            'Lowest at $lowestPriceStore',
+            'Lowest at ${product.lowestPriceStore}',
             style: context.textTheme.labelSmall?.copyWith(
               color: context.colors.onSurfaceVariant,
             ),
@@ -111,7 +96,7 @@ class ProductCard extends StatelessWidget {
               ),
               const SizedBox(width: 4),
               Text(
-                price,
+                product.price,
                 style: context.textTheme.titleLarge?.copyWith(
                   color: context.colors.onSurface,
                   fontWeight: FontWeight.bold,
@@ -126,7 +111,7 @@ class ProductCard extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
-              color:context.colors.primary,
+              color: context.colors.primary,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

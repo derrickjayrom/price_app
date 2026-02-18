@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:price_app/presentation/widgets/app_location_Picker.dart';
+import 'package:price_app/presentation/notifier/data_notifier.dart';
+import 'package:price_app/presentation/widgets/app_location_picker.dart';
 import 'package:price_app/presentation/widgets/app_text_field.dart';
 import 'package:price_app/presentation/widgets/custom_tab_container.dart';
 import 'package:price_app/presentation/widgets/featured_stores.dart';
 import 'package:price_app/presentation/widgets/product_card.dart';
 import 'package:price_app/presentation/widgets/stock_alert_card.dart';
+import 'package:price_app/presentation/widgets/text_widget.dart';
 import 'package:price_app/presentation/widgets/welcome_user.dart';
+import 'package:price_app/utils/enum.dart';
 import 'package:price_app/utils/extention.dart';
 import 'package:price_app/widget/app_button_one.dart';
+import 'package:provider/provider.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -20,6 +24,8 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
+    final dataNotifier = context.watch<DataNotifier>();
+    final products = dataNotifier.filteredResults;
     return Scaffold(
       backgroundColor: context.scaffoldColor,
       body: SafeArea(
@@ -42,11 +48,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         child: AppTextField(
                           hintText: 'Search products...',
                           borderColor: context.colors.secondary,
-                          canFocus: false,
+                          canFocus: true,
                           prefixWidget: Icon(
                             Icons.search,
                             color: context.colors.scrim,
                           ),
+                          onChanged: (value) {
+                            dataNotifier.applySearch(
+                              query: value,
+                              scope: dataNotifier.activeScope,
+                            );
+                          },
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.text,
                         ),
@@ -65,39 +77,50 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ],
                   ).padding14h,
                   Gap(24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'FEATURED STORES',
-                        style: context.textTheme.titleMedium?.copyWith(
-                          color: context.colors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'View All',
-                        style: context.textTheme.labelMedium?.copyWith(
-                          color: context.colors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  TextWidget(
+                    text: 'Featured Stores',
+                    style: context.textTheme.labelMedium?.copyWith(
+                      color: context.colors.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    showViewAll: true,
                   ).padding14h,
                   Gap(12),
                   FeaturedStores().padding14h,
                   Gap(10),
-                  CustomTabContainer(),
+                  CustomTabContainer(
+                    onTabSelected: (index) {
+                      ProductSearchScope scope;
+                      switch (index) {
+                        case 1:
+                          scope = ProductSearchScope.groceries;
+                          break;
+                        case 2:
+                          scope = ProductSearchScope.tech;
+                          break;
+                        case 3:
+                          scope = ProductSearchScope.house;
+                          break;
+                        default:
+                          scope = ProductSearchScope.all;
+                      }
+                      dataNotifier.applySearch(
+                        query: dataNotifier.query,
+                        scope: scope,
+                      );
+                    },
+                  ),
                   Gap(24),
                   Row(
                     children: [
-                      Text(
-                        'Trending Essentials',
-                        style: context.textTheme.headlineSmall?.copyWith(
-                          color: context.colors.onSurface,
-                          fontWeight: FontWeight.bold,
+                      TextWidget(
+                        text: 'Trending Essentials',
+                        style: context.textTheme.labelMedium?.copyWith(
+                          color: context.colors.primary,
+                          fontWeight: FontWeight.w500,
                         ),
-                      ),
+                        showViewAll: false,
+                      ).padding14h,
                       Gap(8),
                       Icon(
                         Icons.trending_up,
@@ -105,64 +128,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         size: 20,
                       ),
                     ],
-                  ),
+                  ).padding14h,
                   Gap(16),
-
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ProductCard(
-                          name: 'Royal Feast Perfumed Rice (5kg)',
-                          imagePath: 'assets/jpeg/rice.jpeg',
-                          category: 'GROCERIES',
-                          rating: 4.8,
-                          lowestPriceStore: 'Makola',
-                          price: '95.00',
-                          originalPrice: '',
-                        ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      spacing: 8,
+                      children: List.generate(
+                        products.length,
+                        (i) => ProductCard(product: products[i]),
                       ),
-                      Gap(16),
-                      Expanded(
-                        child: ProductCard(
-                          name: 'Samsung Galaxy A14 64GB',
-                          imagePath: 'assets/jpeg/samsung.jpeg',
-                          category: 'TECH',
-                          rating: 4.5,
-                          lowestPriceStore: 'CompuGhana',
-                          price: '1,800',
-                          originalPrice: '',
-                        ),
-                      ),
-                    ],
-                  ),
-                  Gap(16),
-                  const Row(
-                    children: [
-                      Expanded(
-                        child: ProductCard(
-                          name: 'Frytol Cooking Oil (1 Liter)',
-                          imagePath: 'assets/jpeg/oil.jpeg',
-                          category: 'PANTRY',
-                          rating: 4.9,
-                          lowestPriceStore: 'Melcom',
-                          price: '25.00',
-                          originalPrice: '',
-                        ),
-                      ),
-                      Gap(16),
-                      Expanded(
-                        child: ProductCard(
-                          name: 'iPhone 13 Pro (Refurbished)',
-                          imagePath: 'assets/jpeg/iphone.jpeg',
-                          category: 'APPLE',
-                          rating: 5.0,
-                          lowestPriceStore: 'Franko',
-                          price: '6,500',
-                          originalPrice: '',
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ).padding14h,
                   Gap(24),
                   const StockAlertCard(),
                   Gap(24),
@@ -170,7 +147,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               ),
             ),
           ],
-        ),
+        ).padding10v,
       ),
     );
   }

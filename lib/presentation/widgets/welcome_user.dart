@@ -11,16 +11,16 @@ class WelcomeUser extends StatelessWidget {
       children: [
         Text(
           'WELCOME BACK',
-          style: context.textTheme.labelSmall?.copyWith(
+          style: context.textTheme.labelMedium?.copyWith(
             color: context.colors.primary,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
           ),
         ),
         Text(
           'Kofi Mensah',
-          style: context.textTheme.headlineMedium?.copyWith(
+          style: context.textTheme.labelSmall?.copyWith(
             color: context.colors.onSurface,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ],

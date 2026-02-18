@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:price_app/data/models/featured_store_model.dart';
 import 'package:price_app/presentation/notifier/ui_provider.dart';
 import 'package:price_app/presentation/widgets/image_loader.dart';
@@ -28,39 +27,14 @@ class _FeaturedStoresState extends State<FeaturedStores> {
     FeaturedStoreModel(name: 'Panda Mart', image: 'assets/png/pandamart.png'),
   ];
 
-  void openPage(String storeOption) {
-    final lowerCaseStoreOption = storeOption.toLowerCase();
-    switch (lowerCaseStoreOption) {
-      case 'melcom':
-        context.pushNamed('melcomPage', pathParameters: {'id': 'melcom_page'});
-        uiNotifier.shouldShowProgressWidget = false;
-        break;
-      case 'compu gh':
-        context.pushNamed(
-          'compuGhPage',
-          pathParameters: {'id': 'compu_gh_page'},
-        );
-        uiNotifier.shouldShowProgressWidget = false;
-        break;
-      case 'telephonica':
-        context.pushNamed(
-          'telephonicaPage',
-          pathParameters: {'id': 'telephonica_page'},
-        );
-        uiNotifier.shouldShowProgressWidget = false;
-        break;
-    }
-  }
-
   Widget buildStoreItem(FeaturedStoreModel store) {
     return SizedBox(
       height: 110,
       width: 80,
       child: Material(
-        color: Colors.transparent,
+        color: context.scaffoldColor,
         child: InkWell(
           borderRadius: BorderRadius.circular(8),
-          onTap: () => openPage(store.name),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -87,10 +61,9 @@ class _FeaturedStoresState extends State<FeaturedStores> {
   Widget build(BuildContext context) {
     uiNotifier = context.watch<UiNotifier>();
     return Container(
-      height: 110,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: context.colors.tertiary,
+        color: context.scaffoldColor,
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
