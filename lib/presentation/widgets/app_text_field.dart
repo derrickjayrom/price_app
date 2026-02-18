@@ -1,6 +1,6 @@
+import 'package:price_app/utils/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:price_app/utils/extention.dart';
 
 class AppTextField extends StatefulWidget {
   const AppTextField({
@@ -35,6 +35,7 @@ class AppTextField extends StatefulWidget {
     this.showFocusBorder = true,
     this.canFocus = true,
     this.hintTextStyle,
+    this.showCursor = true,
   });
   final String? initialValue;
 
@@ -53,6 +54,7 @@ class AppTextField extends StatefulWidget {
   final Color? textColor;
   final Color? prefixIconColor;
   final TextInputAction? textInputAction;
+  final bool showCursor;
 
   final String? label;
   final TextStyle? labelStyle;
@@ -80,10 +82,10 @@ class _AppTextFieldState extends State<AppTextField> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      localController.text = widget.initialValue ?? '';
-      widget.controller?.text = widget.initialValue ?? '';
       if (widget.initialValue != null) {
-        widget.onChanged?.call(widget.initialValue ?? '');
+        localController.text = widget.initialValue!;
+        widget.controller?.text = widget.initialValue!;
+        widget.onChanged?.call(widget.initialValue!);
       }
     });
   }
@@ -130,6 +132,7 @@ class _AppTextFieldState extends State<AppTextField> {
             fontWeight: FontWeight.w500,
             color: widget.textColor,
           ),
+          showCursor: widget.showCursor,
           onFieldSubmitted: widget.onSubmitted,
           onChanged: widget.onChanged,
           keyboardType: widget.keyboardType,

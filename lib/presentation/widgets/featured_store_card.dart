@@ -20,7 +20,7 @@ class FeaturedStoreCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         image: DecorationImage(
-          image: AssetImage(imagePath), // Assuming local asset for now
+          image: AssetImage(imagePath),
           fit: BoxFit.cover,
         ),
       ),
