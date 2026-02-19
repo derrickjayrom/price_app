@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:price_app/data/models/product_model.dart';
+import 'package:price_app/models/product_model.dart';
 import 'package:price_app/data/product_data.dart';
 import 'package:price_app/utils/enum.dart';
 import 'package:price_app/utils/utilities.dart';

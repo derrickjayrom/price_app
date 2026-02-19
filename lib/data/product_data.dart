@@ -1,4 +1,4 @@
-import 'package:price_app/data/models/product_model.dart';
+import 'package:price_app/models/product_model.dart';
 
 class ProductData {
   static final List<ProductModel> products = [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:price_app/data/models/tab_item_model.dart';
+import 'package:price_app/models/tab_item_model.dart';
 import 'package:price_app/data/section_header_items.dart';
 import 'package:price_app/presentation/notifier/ui_provider.dart';
 import 'package:price_app/presentation/widgets/tab_bar_items.dart';

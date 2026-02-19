@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:price_app/data/models/featured_store_model.dart';
+import 'package:price_app/models/featured_store_model.dart';
 import 'package:price_app/presentation/notifier/ui_provider.dart';
 import 'package:price_app/presentation/widgets/image_loader.dart';
 import 'package:price_app/utils/extention.dart';

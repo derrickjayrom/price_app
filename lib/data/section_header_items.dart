@@ -1,4 +1,4 @@
-import 'package:price_app/data/models/tab_item_model.dart';
+import 'package:price_app/models/tab_item_model.dart';
 
 class SectionHeaderItems {
   static const List<TabItemModel> items = [
