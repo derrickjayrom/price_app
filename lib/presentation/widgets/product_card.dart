@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:price_app/models/product_model.dart';
 import 'package:price_app/utils/app_colors.dart';
 import 'package:price_app/utils/extention.dart';
@@ -33,9 +34,8 @@ class ProductCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          Gap(12),
 
-          // Category and Rating
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -62,30 +62,26 @@ class ProductCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8),
-
-          // Product Name
+          Gap(8),
           Text(
             product.name,
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: context.textTheme.titleMedium?.copyWith(
               color: context.colors.onSurface,
               height: 1.2,
             ),
           ),
-          const SizedBox(height: 8),
-
-          // Store info
+          Gap(8),
           Text(
             'Lowest at ${product.lowestPriceStore}',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: context.textTheme.labelSmall?.copyWith(
               color: context.colors.onSurfaceVariant,
             ),
           ),
-          const SizedBox(height: 8),
-
-          // Price
+          Gap(8),
           Row(
             children: [
               Text(
@@ -104,9 +100,7 @@ class ProductCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
-
-          // Compare Button
+          Gap(12),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -124,7 +118,7 @@ class ProductCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(width: 4),
+                Gap(4),
                 const Icon(Icons.arrow_forward, size: 14, color: Colors.black),
               ],
             ),
