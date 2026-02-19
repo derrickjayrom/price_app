@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:price_app/models/product_model.dart';
+import 'package:price_app/presentation/widgets/image_loader.dart';
 import 'package:price_app/utils/app_colors.dart';
 import 'package:price_app/utils/extention.dart';
+import 'package:price_app/widget/app_button_one.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
@@ -13,29 +15,24 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 160,
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: context.colors.surfaceContainer,
+        color: context.colors.secondary,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: context.colors.primaryFixedDim),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 100,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: AssetImage(product.imagePath),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+         ImageLoader(
+          isAsset: true,
+          fit: BoxFit.fitWidth,
+          imageUrl: product.imagePath,
+          height: 100,
+          width: double.infinity,
+          borderRadius: BorderRadius.circular(12),
+         ),
           Gap(12),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -90,7 +87,7 @@ class ProductCard extends StatelessWidget {
                   color: context.colors.onSurface,
                 ),
               ),
-              const SizedBox(width: 4),
+             Gap(4),
               Text(
                 product.price,
                 style: context.textTheme.titleLarge?.copyWith(
@@ -101,28 +98,24 @@ class ProductCard extends StatelessWidget {
             ],
           ),
           Gap(12),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(
-              color: context.colors.primary,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Compare',
-                  style: context.textTheme.labelMedium?.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Gap(4),
-                const Icon(Icons.arrow_forward, size: 14, color: Colors.black),
-              ],
-            ),
+         AppButton(
+          radius: 8,
+          isLoading: false,
+          height: 30,
+          trailing: Icon(
+            Icons.arrow_forward,
+            color: context.colors.onPrimary,
+            size: 14,
           ),
+          isTextButton: true,
+          title: 'Compare',
+          bgColor: context.colors.primary,
+          textStyle: context.textTheme.labelMedium?.copyWith(
+            color: context.colors.onPrimary,
+            fontWeight: FontWeight.bold,
+          ),
+          onTap: () {},
+         )
         ],
       ),
     );

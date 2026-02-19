@@ -141,7 +141,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ),
                   ).padding14h,
                   Gap(24),
-                  const StockAlertCard(),
+                  const StockAlertCard().padding14h,
                   Gap(24),
                 ],
               ),

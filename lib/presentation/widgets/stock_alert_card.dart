@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:price_app/utils/app_colors.dart';
+import 'package:gap/gap.dart';
 import 'package:price_app/utils/extention.dart';
+import 'package:price_app/widget/app_button_one.dart';
 
 class StockAlertCard extends StatelessWidget {
   const StockAlertCard({super.key});
@@ -22,63 +23,42 @@ class StockAlertCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Stock Alert',
+                      'Stock Alert 🔔',
                       style: context.textTheme.titleLarge?.copyWith(
-                        color: context.colors.onSurface,
+                        color: context.colors.onPrimary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    const Icon(
-                      Icons.notifications_active,
-                      color: AppColors.dYellow,
-                      size: 20,
-                    ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                Gap(6),
                 Text(
                   'Get notified when prices drop for your essentials.',
                   style: context.textTheme.bodyMedium?.copyWith(
-                    color: context.colors.onSurfaceVariant,
+                    color: context.colors.onPrimary,
                   ),
                 ),
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    'Set Alert',
-                    style: context.textTheme.labelMedium?.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Gap(16),
+                AppButton(
+                  onTap: () {},
+                  radius: 8,
+                  height: 30,
+                  isTextButton: true,
+                  bgColor: context.colors.primary,
+                  title: 'Set Alert',
+                  textStyle: context.textTheme.labelMedium?.copyWith(
+                    color: context.colors.onPrimary,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
             ),
           ),
           // Bell Icon (Placeholder or SVG)
-          Opacity(
-            opacity: 0.1,
-            child: Icon(
-              Icons.notifications,
-              size: 80,
-              color: AppColors.primary,
-            ),
-            // If we had the SVG for the big bell, we'd use it here
-            //  SvgPicture.asset(
-            //   AppIcons.bell,
-            //   width: 80,
-            //   height: 80,
-            //   colorFilter: ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
-            // ),
+          Icon(
+            Icons.notifications,
+            size: 80,
+            color: context.colors.onPrimaryContainer,
           ),
         ],
       ),
