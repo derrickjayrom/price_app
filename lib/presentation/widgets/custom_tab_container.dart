@@ -17,6 +17,7 @@ class CustomTabContainer extends StatefulWidget {
     this.onTabSelected,
     this.selectedIndex,
     this.onTap,
+    
   });
 
   @override

@@ -11,8 +11,9 @@ class StockAlertCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: context.colors.secondaryContainer,
+        color: context.colors.secondaryContainer.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: context.colors.primary, width: 1),
       ),
       child: Row(
         children: [
@@ -25,7 +26,7 @@ class StockAlertCard extends StatelessWidget {
                     Text(
                       'Stock Alert 🔔',
                       style: context.textTheme.titleLarge?.copyWith(
-                        color: context.colors.onPrimary,
+                        color: context.colors.onSurface,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -35,20 +36,21 @@ class StockAlertCard extends StatelessWidget {
                 Text(
                   'Get notified when prices drop for your essentials.',
                   style: context.textTheme.bodyMedium?.copyWith(
-                    color: context.colors.onPrimary,
+                    color: context.colors.onSurface,
                   ),
                 ),
                 Gap(16),
                 AppButton(
                   onTap: () {},
                   radius: 8,
+                  width: 83,
                   height: 30,
                   isTextButton: true,
                   bgColor: context.colors.primary,
                   title: 'Set Alert',
                   textStyle: context.textTheme.labelMedium?.copyWith(
                     color: context.colors.onPrimary,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

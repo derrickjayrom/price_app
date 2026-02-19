@@ -5,12 +5,14 @@ import 'package:price_app/presentation/widgets/app_location_picker.dart';
 import 'package:price_app/presentation/widgets/app_text_field.dart';
 import 'package:price_app/presentation/widgets/custom_tab_container.dart';
 import 'package:price_app/presentation/widgets/featured_stores.dart';
+import 'package:price_app/presentation/widgets/filter_screen.dart';
 import 'package:price_app/presentation/widgets/product_card.dart';
 import 'package:price_app/presentation/widgets/stock_alert_card.dart';
 import 'package:price_app/presentation/widgets/text_widget.dart';
 import 'package:price_app/presentation/widgets/welcome_user.dart';
 import 'package:price_app/utils/enum.dart';
 import 'package:price_app/utils/extention.dart';
+import 'package:price_app/utils/utilities.dart';
 import 'package:price_app/widget/app_button_one.dart';
 import 'package:provider/provider.dart';
 
@@ -72,7 +74,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         ).padding8h,
                         width: 50,
                         bgColor: context.colors.secondary,
-                        onTap: () {},
+                        onTap: () {
+                          openFilterBottomSheet(
+                            context: context,
+                            child: FilterScreen(),
+                          );
+                        },
                       ),
                     ],
                   ).padding14h,

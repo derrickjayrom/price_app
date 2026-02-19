@@ -54,7 +54,7 @@ class _TabBarItemState extends State<TabBarItem> {
         : (widget.unselectedBg ?? context.colors.secondary));
 
     final Color borderColor = widget.isSelected
-        ? context.colors.primaryContainer
+        ? context.colors.primary
         : context.colors.secondary;
 
     final double borderWidth = widget.isSelected
